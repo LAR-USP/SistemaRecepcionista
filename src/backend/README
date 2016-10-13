@@ -1,0 +1,4 @@
+Webservices que recebem requisições por texto ou voz
+E respondem por ambas interfaces.
+
+Progamado em Java rodando no servidor de aplicação Tomcat 8.5.6
