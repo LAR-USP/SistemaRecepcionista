@@ -1,0 +1,35 @@
+.searchdiv{
+    position: relative; /* Temporário */
+    top: 50%; /* Temporário */
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+}
+
+.searchform{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 50%;
+}
+
+.searchbar{
+    width: 90%;
+    height: 6%;
+    box-sizing: border-box;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.4s ease-in-out;
+}
+
+.searchbar:focus{
+    border: 2px solid gray;
+}
+
+.submit{
+    width: 6%;
+    height: 6%;
+}
