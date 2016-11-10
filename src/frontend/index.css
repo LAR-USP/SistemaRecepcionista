@@ -16,28 +16,47 @@ html, body{
 }
 
 #searchform{
+    padding: 0;
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     height: 100%;
     font-size: 0px;
-    background-color: lightgray;
+    background-color: white;
 }
 
 #searchbar{
+    display: inline-block;
+    float: left;
     padding-left: 1%;
     font-size: 20px;
-    width: 94%;
-    height: 100%;
-    box-sizing: border-box;
+    width: 92%;
+    height: 95%;
     border: 2px solid lightgray;
     outline: none;
     transition: border 0.4s ease-in-out;
+    border-right:none;
+}
+
+#barspeech{
+    width: 6%;
+    height: 100%;
+    border: 0;
+    float: left;
+    border: 2px solid lightgray;
+    transition: border 0.4s ease-in-out;
+    border-left:none;
 }
 
 #searchbar:focus{
     border: 2px solid gray;
+    border-right:none;
+}
+
+#searchbar:focus ~ #barspeech{
+    border: 2px solid gray;
+    border-left:none;
 }
 
 #submit{
