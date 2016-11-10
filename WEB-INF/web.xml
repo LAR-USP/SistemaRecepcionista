@@ -4,9 +4,17 @@
         <servlet-name>Search</servlet-name>
         <servlet-class>LARA.Search</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Detect</servlet-name>
+        <servlet-class>LARA.Detect</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Detect</servlet-name>
+        <url-pattern>/Detect</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
