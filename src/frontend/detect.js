@@ -1,3 +1,6 @@
+// Faz com que o Kinect examine o que observa para
+// detectar a presença de uma pessoa, com intervalos
+// de tempo constantes.
 window.on('load', function(){
     var str = $("#searchbar").val();
     $("#searchdiv").css('top', '0%');

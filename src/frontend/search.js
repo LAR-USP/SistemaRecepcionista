@@ -1,3 +1,5 @@
+// Detecta a inserção de caracteres na barra de pesquisa
+// e envia a entrada para o servidor via AJAX.
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
     $("#searchdiv").css('top', '0%');
@@ -16,6 +18,7 @@ $(document).on('input', '#searchbar', function(){
     });
 });
 
+// Inicia a entrada de voz.
 function startDictation() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
         var recognition = new webkitSpeechRecognition();
