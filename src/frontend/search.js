@@ -18,10 +18,12 @@ $(document).on('input', '#searchbar', function(){
     });
 });
 
+var recogntion = null;
+
 // Inicia a entrada de voz.
 function startDictation() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
-        var recognition = new webkitSpeechRecognition();
+        recognition = new webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = false;
         recognition.lang = "pt-BR";
