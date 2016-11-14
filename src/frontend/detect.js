@@ -1,10 +1,11 @@
 // Faz com que o Kinect examine o que observa para
 // detectar a presença de uma pessoa, com intervalos
 // de tempo constantes.
-window.on('load', function(){
-    var str = $("#searchbar").val();
-    $("#searchdiv").css('top', '0%');
-    $("#results").css('top', '10%');
+$(window).on('load', callDetect);
+
+window.setInterval(callDetect, 10*1000);
+
+function callDetect(){
     $.ajax({
             url:'Detect',
             data:{},
@@ -12,10 +13,9 @@ window.on('load', function(){
             cache:false,
             success:function(data){
                 $('#results').text(data); 
-            },
+        },
         error:function(){
             alert('error');
         }
     });
-});
-
+}
