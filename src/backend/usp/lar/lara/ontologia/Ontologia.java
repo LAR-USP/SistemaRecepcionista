@@ -1,9 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package usp.lar.lara.ontologia;
-
 
 import java.io.*;
 import java.util.*;
@@ -41,7 +36,8 @@ public class Ontologia {
         //        }
         try {
             System.out.println("\n\nICMC\n\n");
-            ontologiaICMC.load(new File("Icmc.owl"));
+            //Icmc.owl
+            ontologiaICMC.load(new File("rsc/ontologia.owl"));
             
             ontologiaICMC.verificaConsistencia();
             ontologiaICMC.showClasses();
@@ -54,9 +50,6 @@ public class Ontologia {
         } catch (Exception e) {
             Logger.getLogger(Ontologia.class.getName()).log(Level.SEVERE, null, e);
         }
-
-
-
     }
 
     public ArrayList<String> executaPropriedade(String individuo, String propriedade){
