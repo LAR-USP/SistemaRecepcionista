@@ -13,7 +13,6 @@
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
-                <root id="src.dir"/>
                 <root id="src.dir2" name="Pacotes de Códigos-fonte"/>
             </source-roots>
             <test-roots/>

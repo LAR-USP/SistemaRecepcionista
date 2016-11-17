@@ -1,4 +1,4 @@
-package LARA;
+package usp.lar.lara.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +19,7 @@ public class Search extends HttpServlet{
      * @throws ServletException
      * @throws IOException 
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
@@ -32,6 +33,7 @@ public class Search extends HttpServlet{
      * @throws ServletException
      * @throws IOException 
      */
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
