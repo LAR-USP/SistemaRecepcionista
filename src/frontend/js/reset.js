@@ -27,3 +27,4 @@ function checkTime(){
         reset();
     }
 }
+
