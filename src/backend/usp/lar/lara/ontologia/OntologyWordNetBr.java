@@ -7,12 +7,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.*;
 import org.semanticweb.owlapi.util.OWLOntologyWalker;
 import org.semanticweb.owlapi.util.OWLOntologyWalkerVisitor;
 import org.semanticweb.HermiT.Reasoner.ReasonerFactory;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
 /**
  *
@@ -157,7 +159,7 @@ public class OntologyWordNetBr {
         
         this.ontology = this.manager.loadOntologyFromOntologyDocument(arquivo);    
         this.ontologyID = ontology.getOntologyID();
-        this.ontologyIRI = this.ontologyID.getOntologyIRI();
+        this.ontologyIRI = this.ontologyID.getOntologyIRI().get();
         this.factory = manager.getOWLDataFactory();
         reasonerFactory = new ReasonerFactory();
         reasoner = reasonerFactory.createReasoner(ontology);
@@ -190,12 +192,9 @@ public class OntologyWordNetBr {
         // We now use the manager to apply the change
         manager.applyChange(addAxiom);
         // We should also find that B is an ASSERTED superclass of A
-        Set<OWLClassExpression> superClasses = clsA.getSuperClasses(ontology);
+        Stream<OWLClassExpression> superClasses = EntitySearcher.getSuperClasses(clsA, ontology);
         System.out.println("Asserted superclasses of " + clsA + ":");
-        for (OWLClassExpression desc : superClasses) {
-            System.out.println(desc);
-        }
-        
+        superClasses.forEach(desc -> System.out.println(desc));
         
     }
     public void showClasses(){
@@ -273,17 +272,15 @@ public class OntologyWordNetBr {
         // visit(OWLObjectSomeValuesFrom) method, because we are interested in
         // some values from restrictions.
         
-        OWLOntologyWalkerVisitor<Object> visitor = new OWLOntologyWalkerVisitor<Object>(
-                walker) {
+        OWLOntologyWalkerVisitor visitor = new OWLOntologyWalkerVisitor(walker) {
             @Override
-            public Object visit(OWLObjectSomeValuesFrom desc) {
+            public void visit(OWLObjectSomeValuesFrom desc) {
                 // Print out the restriction
                 System.out.println(desc);
                 // Print out the axiom where the restriction is used
                 System.out.println("         " + getCurrentAxiom());
                 System.out.println();
                 // We don't need to return anything here.
-                return null;
             }
             
         };
