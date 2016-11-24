@@ -25,6 +25,7 @@ function checkTime(){
     ++idle_time;
     if(idle_time >= IDLE_MAX){
         reset();
+        idle_time = 0;
     }
 }
 
