@@ -3,6 +3,7 @@
     <servlet>
         <servlet-name>Search</servlet-name>
         <servlet-class>usp.lar.lara.servlet.Search</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>Detect</servlet-name>

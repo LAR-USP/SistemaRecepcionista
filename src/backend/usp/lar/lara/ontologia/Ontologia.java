@@ -37,13 +37,13 @@ public class Ontologia {
         try {
             System.out.println("\n\nICMC\n\n");
             //Icmc.owl
-            ontologiaICMC.load(new File("rsc/ontologia.owl"));
+            ontologiaICMC.load(new File(getClass().getResource("/ontologia.owl").getPath()));
             
             ontologiaICMC.verificaConsistencia();
             ontologiaICMC.showClasses();
             
             System.out.println("\n\nWord Net\n\n");
-            ontologiaWordNet.loadWordNetBrOntology(new File("Palavras.owl"));
+            ontologiaWordNet.loadWordNetBrOntology(new File(getClass().getResource("/Palavras.owl").getPath()));
             ontologiaWordNet.verificaConsistencia();
             ontologiaWordNet.showClasses();
             

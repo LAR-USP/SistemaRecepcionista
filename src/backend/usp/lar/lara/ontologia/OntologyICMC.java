@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.stream.Stream;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 
 import org.semanticweb.HermiT.Reasoner.ReasonerFactory;
 import org.semanticweb.owlapi.reasoner.*;
-import org.semanticweb.owlapi.search.EntitySearcher;
 
 /**
  *
@@ -193,14 +191,14 @@ public class OntologyICMC {
             OWLObjectProperty propriedade = i.next();
             System.out.println(propriedade.getIRI().getFragment() + ": ");
             System.out.println("Domínios: ");
-            Iterator<OWLClassExpression> j = EntitySearcher.getDomains(propriedade, ontology).iterator();
+            Iterator<OWLClassExpression> j = propriedade.getDomains(ontology).iterator();
             while (j.hasNext()) {
                 OWLClass dominio = j.next().asOWLClass();
                 System.out.println(dominio.getIRI().getFragment());
             }
             System.out.println("");
             System.out.println("Ranges: ");
-            Iterator<OWLClassExpression> k = EntitySearcher.getRanges(propriedade, ontology).iterator();
+            Iterator<OWLClassExpression> k = propriedade.getRanges(ontology).iterator();
             while (k.hasNext()) {
                 OWLClass range = k.next().asOWLClass();
                 System.out.println(range.getIRI().getFragment());
@@ -219,11 +217,9 @@ public class OntologyICMC {
         while (i.hasNext()) {
             OWLObjectProperty propriedade = i.next();
             
-            Stream<OWLClassExpression> dominios = EntitySearcher.getDomains(propriedade, ontology);
-            Stream<OWLClassExpression> ranges = EntitySearcher.getRanges(propriedade, ontology);
-            OWLClassExpression dominioClass = factory.getOWLClass(IRI.create(ontologyIRI+"#"+dominio));
-            OWLClassExpression rangeClass = factory.getOWLClass(IRI.create(ontologyIRI+"#"+range));
-            if(dominios.anyMatch(dom -> dom.equals(dominioClass)) && ranges.anyMatch(dom -> dom.equals(rangeClass))){
+            Set<OWLClassExpression> dominios = propriedade.getDomains(ontology);
+            Set<OWLClassExpression> ranges = propriedade.getRanges(ontology);
+            if(dominios.contains(factory.getOWLClass(IRI.create(ontologyIRI+"#"+dominio))) && ranges.contains(factory.getOWLClass(IRI.create(ontologyIRI+"#"+range)))){
                 properties.add(propriedade.getIRI().getFragment());
             }
                     
@@ -368,7 +364,7 @@ public class OntologyICMC {
 
         this.ontology = this.manager.loadOntologyFromOntologyDocument(arquivo);
         this.ontologyID = ontology.getOntologyID();
-        this.ontologyIRI = this.ontologyID.getOntologyIRI().get();
+        this.ontologyIRI = this.ontologyID.getOntologyIRI();
         this.factory = manager.getOWLDataFactory();
         this.reasonerFactory = new ReasonerFactory();
         this.reasoner = reasonerFactory.createReasoner(ontology);
