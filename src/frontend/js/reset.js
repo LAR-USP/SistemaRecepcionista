@@ -12,7 +12,7 @@ function reset(){
     idle_time = 0;
 }
 
-var IDLE_MAX = 60; // Segundos.
+var IDLE_MAX = 600; // Segundos.
 var idle_time = 0; // Segundos.
 
 $(window).on('click mousemove keypress input', function(){

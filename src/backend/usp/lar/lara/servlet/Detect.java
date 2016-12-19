@@ -65,7 +65,7 @@ public class Detect extends HttpServlet {
             Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0));
         }
 
-        PrintWriter out = response.getWriter();
-        out.println(String.format("%s faces detectadas", faceDetections.toArray().length));
+        // PrintWriter out = response.getWriter();
+        // out.println(String.format("%s faces detectadas", faceDetections.toArray().length));
     }
 }

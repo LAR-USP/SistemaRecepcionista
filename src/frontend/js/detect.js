@@ -12,7 +12,6 @@ function callDetect(){
             type:'get',
             cache:false,
             success:function(data){
-                $('#results').text(data); 
         },
         error:function(){
             alert('error');
