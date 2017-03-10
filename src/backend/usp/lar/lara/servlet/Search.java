@@ -23,6 +23,22 @@ public class Search extends HttpServlet{
     public Search(){
         o = new Ontologia();
     }
+
+    public ArrayList<ArrayList<String>> parse(String frase){
+        String[] tokens = frase.split(" ");
+        ArrayList<String> individuos = null;
+        ArrayList<String> propriedades = new ArrayList();
+        propriedades.add("investiga");
+        for(int i = 0; i < tokens.length; ++i){
+            if(this.o.éEntitdade(tokens[i])){
+                individuos = o.executaPropriedade(tokens[i], "éChaveDe");
+            }
+        }
+        ArrayList<ArrayList<String>> result = new ArrayList();
+        result.add(individuos);
+        result.add(propriedades);
+        return result;
+    }
     /**
      * @brief Recebe um envio GET do AJAX em search.js.
      * @param request Conteúdo da mensagem.
@@ -49,11 +65,12 @@ public class Search extends HttpServlet{
         throws ServletException, IOException {
 
         String pergunta = request.getParameter("content");
-        String[] partes = pergunta.split(" ");
+
+        String[] parsed = this.parse(pergunta);
         
         String answer = "";
-        if(partes.length == 2){
-            ArrayList<String> result = o.executaPropriedade(partes[0], partes[1]);
+        if(parsed[0] != "" && parsed[1] != ""){
+            ArrayList<String> result = o.executaPropriedade(parsed[0], parsed[1]);
             if(result != null){
                 for (Iterator<String> it = result.iterator(); it.hasNext();) {
                     String t = it.next();

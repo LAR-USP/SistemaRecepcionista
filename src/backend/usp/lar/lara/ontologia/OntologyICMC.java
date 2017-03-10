@@ -130,6 +130,15 @@ public class OntologyICMC {
         return instancias;
     }
 
+    public boolean éEntidade(String entidade){
+        entidade = toCamelCase(entidade);
+        OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI + "#" + entidade));
+        if(indivíduoOWL != null){
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<String> executeProperty(String indivíduo, String propriedade) {
         indivíduo = toCamelCase(indivíduo);
         ArrayList<String> instancias = new ArrayList<String>();

@@ -79,6 +79,10 @@ public class Ontologia {
     public String getOntologyIndividualClasses(String palavra){
         return this.ontologiaICMC.getOntologyIndividualClasses(palavra);
     }
+
+    public boolean éEntitdade(String entitdade){
+        return ontologiaICMC.éEntidade(entitdade);
+    }
     
     public boolean éClasse(String palavra){
         return ontologiaICMC.éClasse(palavra);
