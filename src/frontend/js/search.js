@@ -1,5 +1,9 @@
 // Detecta a inserção de caracteres na barra de pesquisa
 // e envia a entrada para o servidor via AJAX.
+
+var ultima_entidade = "";
+var ultima_propriedade = "";
+
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
     $("#searchdiv").css('top', '0%');

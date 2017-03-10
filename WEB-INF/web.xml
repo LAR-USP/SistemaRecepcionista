@@ -17,9 +17,9 @@
         <servlet-name>Detect</servlet-name>
         <url-pattern>/Detect</url-pattern>
     </servlet-mapping>
-    <listener>
+    <!-- <listener>
         <listener-class>usp.lar.lara.servlet.LibraryLoader</listener-class>
-    </listener>
+    </listener> -->
     <session-config>
         <session-timeout>
             30
