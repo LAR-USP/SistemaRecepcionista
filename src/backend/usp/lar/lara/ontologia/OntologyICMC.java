@@ -13,7 +13,7 @@ import org.semanticweb.owlapi.reasoner.*;
 
 /**
  *
- * @author ewerton
+ * @author Ewerton Wantroba
  */
 public class OntologyICMC {
 
@@ -118,7 +118,7 @@ public class OntologyICMC {
 
     public ArrayList<String> getInstancesOf(String palavra, boolean classesDiretas) {
         palavra = palavra.replaceAll(" ", "_");
-        ArrayList<String> instancias = new ArrayList<String>();
+        ArrayList<String> instancias = new ArrayList();
         OWLClass classe = factory.getOWLClass(IRI.create(ontologyIRI + "#" + palavra));
 
         NodeSet<OWLNamedIndividual> individuos = reasoner.getInstances(classe, classesDiretas);
@@ -133,15 +133,12 @@ public class OntologyICMC {
     public boolean éEntidade(String entidade){
         entidade = toCamelCase(entidade);
         OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI + "#" + entidade));
-        if(indivíduoOWL != null){
-            return true;
-        }
-        return false;
+        return indivíduoOWL != null;
     }
 
     public ArrayList<String> executeProperty(String indivíduo, String propriedade) {
         indivíduo = toCamelCase(indivíduo);
-        ArrayList<String> instancias = new ArrayList<String>();
+        ArrayList<String> instancias = new ArrayList();
         OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI + "#" + indivíduo));
 
 
@@ -160,7 +157,7 @@ public class OntologyICMC {
     }
 
     public ArrayList<String[]> getOntologySuperClasses(ArrayList<String> palavras) {
-        ArrayList<String[]> superClasses = new ArrayList<String[]>();
+        ArrayList<String[]> superClasses = new ArrayList();
         for (int i = 0; i < palavras.size(); i++) {
             String palavra = toCamelCase(palavras.get(i));
 
@@ -177,7 +174,7 @@ public class OntologyICMC {
 
     public ArrayList<String[]> getOntologySubClasses(ArrayList<String> palavras) {
 
-        ArrayList<String[]> subClasses = new ArrayList<String[]>();
+        ArrayList<String[]> subClasses = new ArrayList();
         for (int i = 0; i < palavras.size(); i++) {
             String palavra = toCamelCase(palavras.get(i));
 
@@ -219,7 +216,7 @@ public class OntologyICMC {
     public ArrayList<String> getOntologyProperties(String dominio, String range) {
         dominio = toCamelCase(dominio);
         range = toCamelCase(range);
-        ArrayList<String> properties = new ArrayList<String>();
+        ArrayList<String> properties = new ArrayList();
         Iterator<OWLObjectProperty> i = propriedades.iterator();
         
         
@@ -236,7 +233,7 @@ public class OntologyICMC {
         return properties;
     }
 
-    public boolean éClasse(String palavra){
+    public boolean éClasse(String palavra) {
         palavra = toCamelCase(palavra);
         return ontology.containsClassInSignature(IRI.create(ontologyIRI + "#" + palavra));
     }
@@ -252,7 +249,7 @@ public class OntologyICMC {
         return null;
     }
     public ArrayList<String> getOntologyIndividualClasses(ArrayList<String> palavras) {
-        ArrayList<String> individualClasses = new ArrayList<String>();
+        ArrayList<String> individualClasses = new ArrayList();
         for (int i = 0; i < palavras.size(); i++) {
             String palavra = toCamelCase(palavras.get(i));
             if (ontology.containsIndividualInSignature(IRI.create(ontologyIRI + "#" + palavra))) {

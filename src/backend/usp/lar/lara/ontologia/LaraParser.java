@@ -4,59 +4,78 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
+ * Classe para traduzir as perguntas do usuário para a ontologia.
  * @author Híkaro, Raphael e Tarcísio.
  */
 public class LaraParser {
 
-    public static ArrayList<String> obterPropriedades(String palavra){
-        ArrayList<String> propriedades = new ArrayList();
-        ArrayList<String> investiga = new ArrayList(Arrays.asList("investiga", "pesquisa"));
-        ArrayList<String> ficaEm = new ArrayList(Arrays.asList("sala", "escritório", "escritorio"));
-        ArrayList<String> possuiRamal = new ArrayList(Arrays.asList("ramal", "telefone"));
-        ArrayList<String> possuiEmail = new ArrayList(Arrays.asList("email", "e-mail"));
-        ArrayList<String> exerce = new ArrayList(Arrays.asList("exerce", "cargo"));
-        ArrayList<String> possuiCurriculo = new ArrayList(Arrays.asList("currículo", "curriculo", "lattes"));
+    private static final ArrayList<String> Investiga;
+    private static final ArrayList<String> FicaEm;
+    private static final ArrayList<String> PossuiRamal;
+    private static final ArrayList<String> PossuiEmail;
+    private static final ArrayList<String> Exerce;
+    private static final ArrayList<String> PossuiCurriculo;
 
-        if(investiga.stream().anyMatch(palavra::equalsIgnoreCase)){
+    // Bloco de inicialização de variáveis estáticas.
+    static {
+        Investiga = new ArrayList(Arrays.asList("investiga", "pesquisa"));
+        FicaEm = new ArrayList(Arrays.asList("sala", "escritório", "escritorio"));
+        PossuiRamal = new ArrayList(Arrays.asList("ramal", "telefone"));
+        PossuiEmail = new ArrayList(Arrays.asList("email", "e-mail"));
+        Exerce = new ArrayList(Arrays.asList("exerce", "cargo"));
+        PossuiCurriculo = new ArrayList(Arrays.asList("currículo", "curriculo", "lattes"));
+    }
+
+    public static ArrayList<String> obterPropriedades(String palavra) {
+        ArrayList<String> propriedades = new ArrayList();
+
+        if (investiga.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("investiga");
-        }else if(ficaEm.stream().anyMatch(palavra::equalsIgnoreCase)){
+        } else if (ficaEm.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("ficaEm");
-        }else if(possuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)){
+        } else if (possuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiRamal");
-        }else if(possuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)){
+        } else if (possuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiEmail");
-        }else if(exerce.stream().anyMatch(palavra::equalsIgnoreCase)){
+        } else if (exerce.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("exerce");
-        }else if(palavra.equalsIgnoreCase("contato")){
+        } else if (palavra.equalsIgnoreCase("contato")) {
             propriedades.add("possuiRamal");
             propriedades.add("possuiEmail");
-        }else if(possuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)){
+        } else if (possuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiCurrículo");
         }
         return propriedades;
     }
-    public static ArrayList<ArrayList<String>> parse(String frase, Ontologia o){
+
+    /**
+     * @param frase Phrase to be analysed.
+     * @param o Ontology to be accessed.
+     * @return List of entities and properties.
+     */
+    public static ArrayList<ArrayList<String>> parse( String frase, Ontologia o ) {
         String[] tokens = frase.split(" ");
         ArrayList<String> individuos = new ArrayList();
         ArrayList<String> propriedades = new ArrayList();
-        for(int i = 0; i < tokens.length; ++i){
-            ArrayList<String> prop = obterPropriedades(tokens[i]);
-            if(prop.size() > 0 && !prop.get(0).equals("")){
-                System.out.println(prop.toString());
-                propriedades.addAll(prop);
-            }else if(o.éEntidade(tokens[i])){
-                individuos.addAll(o.executaPropriedade(tokens[i], "éChaveDe"));
-                System.out.println(individuos.toString());
+        for ( String token : tokens ) {
+            ArrayList<String> prop = obterPropriedades( token );
+            if ( prop.size() > 0 && !prop.get(0).equals("") ) {
+                System.out.println( prop.toString() );
+                propriedades.addAll( prop );
+            } else if ( o.éEntidade( token ) ) {
+                individuos.addAll( o.executaPropriedade( token, "éChaveDe" ) );
+                System.out.println( individuos.toString() );
             }
         }
         ArrayList<ArrayList<String>> result = new ArrayList();
-        result.add(individuos);
-        result.add(propriedades);
-        return result;
+        result.add( individuos );
+        result.add( propriedades );
+        return( result );
     }
+
     /**
-     * @param input Resposta do Parser.
+     * @param input Resposta do Parser. Contém duas listas
+     * A 1ª lista contém as entidades e a 2ª lista contém as propriedades.
      * @return Resposta formatada.
      */
     public static String formatResponse( ArrayList<ArrayList<String>> input ) {

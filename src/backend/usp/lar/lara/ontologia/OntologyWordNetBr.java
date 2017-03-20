@@ -16,7 +16,7 @@ import org.semanticweb.HermiT.Reasoner.ReasonerFactory;
 
 /**
  *
- * @author ewerton
+ * @author Wwerton Wantroba
  */
 public class OntologyWordNetBr {
 
@@ -80,7 +80,7 @@ public class OntologyWordNetBr {
     private void createClasses(){
         
         //Criam-se todas as classes de Palavras
-        ArrayList<OWLClass> classes = new ArrayList<OWLClass>();
+        ArrayList<OWLClass> classes = new ArrayList();
         
         OWLClass classPalavra = factory.getOWLClass(IRI.create(ontologyIRI + "#Palavra")); classes.add(classPalavra);
         OWLClass classSubstantivo = factory.getOWLClass(IRI.create(ontologyIRI + "#Substantivo")); classes.add(classSubstantivo);
@@ -128,7 +128,7 @@ public class OntologyWordNetBr {
         manager.addAxiom(ontology, factory.getOWLTransitiveObjectPropertyAxiom(antonimo_de));
         
         // cria os domínios e escopos das propriedades
-        Set<OWLAxiom> domainsAndRanges = new HashSet<OWLAxiom>();
+        Set<OWLAxiom> domainsAndRanges = new HashSet();
         
         //for (int i = 0; i < classes.size(); i++) {
             domainsAndRanges.add(factory.getOWLObjectPropertyDomainAxiom(sinonimo_de, classes.get(0)));
@@ -294,7 +294,7 @@ public class OntologyWordNetBr {
     
     public ArrayList<String> getSinonimos(String palavra){
         
-        ArrayList<String> sinonimos = new ArrayList<String>();
+        ArrayList<String> sinonimos = new ArrayList();
       
         OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI+ "#"+ palavra));
         OWLObjectProperty propriedadeOWL = factory.getOWLObjectProperty(IRI.create(ontologyIRI+ "#sinonimoDe"));

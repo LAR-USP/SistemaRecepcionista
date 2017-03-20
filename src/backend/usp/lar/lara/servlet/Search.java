@@ -1,12 +1,7 @@
 package usp.lar.lara.servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Locale;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import usp.lar.lara.ontologia.LaraParser;
@@ -16,10 +11,11 @@ import usp.lar.lara.ontologia.Ontologia;
  * @brief Recebe a entrada da barra de pesquisa e à envia
  * para ser processada.
  * 
- * @author tarcisio
+ * @author Tarcisio
  */
 public class Search extends HttpServlet{
-    private Ontologia o;
+
+    private final Ontologia o;
 
     public Search(){
         o = new Ontologia();
@@ -75,4 +71,5 @@ public class Search extends HttpServlet{
         
         response.getOutputStream().write(answer.getBytes("UTF-8"));
     }
+
 }

@@ -5,11 +5,12 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 
 /**
  *
- * @author ewerton
+ * @author Ewerton Wantroba
  */
 public class Ontologia {
     private OntologyWordNetBr ontologiaWordNet;
@@ -47,7 +48,7 @@ public class Ontologia {
             //ontologiaWordNet.verificaConsistencia();
             //ontologiaWordNet.showClasses();
             
-        } catch (Exception e) {
+        } catch (OWLOntologyCreationException e) {
             Logger.getLogger(Ontologia.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -91,9 +92,10 @@ public class Ontologia {
     public String getClasse(String individuo){
         return ontologiaICMC.getClasse(individuo);
     }
+
     public static String preProcessaString(String str) {
 
-        ArrayList<String> caracteresProibidos = new ArrayList<String>();
+        ArrayList<String> caracteresProibidos = new ArrayList();
         caracteresProibidos.add("");
         caracteresProibidos.add("");
         caracteresProibidos.add("");

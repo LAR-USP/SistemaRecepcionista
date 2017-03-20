@@ -16,13 +16,16 @@ import javax.servlet.ServletContextEvent;
  * @author tarcisio
  */
 public class LibraryLoader implements ServletContextListener{
+
     @Override
     public void contextInitialized(ServletContextEvent context) {
         final String LIBRARY_FILE = "lib"+Core.NATIVE_LIBRARY_NAME+".so";
-        System.load(getClass().getResource("/"+LIBRARY_FILE).getPath());
+        System.load( getClass().getResource("/"+LIBRARY_FILE).getPath() );
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent context) { 
         
     }
+
 }
