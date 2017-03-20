@@ -50,24 +50,7 @@ public class Search extends HttpServlet{
 
         ArrayList<ArrayList<String>> parsed = LaraParser.parse(pergunta, this.o);
         
-        String answer = LaraParser.formatResponse(parsed);
-        // if(parsed.get(0).size() > 0 && parsed.get(1).size() > 0){
-        //     for(Iterator<String> i = parsed.get(0).iterator(); i.hasNext();){
-        //         String indiv = i.next();
-        //         answer = answer.concat(indiv+":\n");
-        //         for(Iterator<String> j = parsed.get(1).iterator(); j.hasNext();){
-        //             String prop = j.next();
-        //             ArrayList<String> results = o.executaPropriedade(indiv, prop);
-        //             if(results.size() > 0){
-        //                 answer = answer.concat(prop+":\n");
-        //                 for(Iterator<String> k = results.iterator(); k.hasNext();){
-        //                     answer = answer.concat(k.next()+"\n");
-        //                 }
-        //             }
-        //         }
-        //         answer = answer.concat("\n");
-        //     }
-        // }
+        String answer = LaraParser.formatResponse(parsed, o);
         
         response.getOutputStream().write(answer.getBytes("UTF-8"));
     }
