@@ -48,11 +48,11 @@ public class Search extends HttpServlet{
 
         String pergunta = request.getParameter("content");
 
-        ArrayList<ArrayList<String>> parsed = LaraParser.parse(pergunta, this.o);
-        
-        String answer = LaraParser.formatResponse(parsed, o);
-        
-        response.getOutputStream().write(answer.getBytes("UTF-8"));
+        ArrayList<ArrayList<String>> parsed = LaraParser.parse( pergunta, this.o );
+
+        String answer = LaraParser.formatResponse( parsed, o );
+
+        response.getOutputStream().write(answer.getBytes( "UTF-8" ) );
     }
 
 }

@@ -1,6 +1,5 @@
 package usp.lar.lara.ontologia;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -130,13 +129,13 @@ public class LaraParser {
             else if ( output_properties.size() == 1 ) {
                 //p.ex. "A sala de Roseli é xxx.";
                 ArrayList<String> results = o.executaPropriedade(entities.get(0), properties.get(0));
-                if(results.isEmpty()){
+                if ( results.isEmpty() ) {
                     response = entities.get(0) + " não tem " + output_properties.get(0) + ".";
                 }
-                if(results.size() == 1){
-                    response = StringUtils.capitalize(output_properties.get( 0 )) + " de " + entities.get( 0 ) + " é " + results.get( 0 ) + ".";   
+                else if( results.size() == 1 ) {
+                    response = capitalize(output_properties.get( 0 )) + " de " + entities.get( 0 ) + " é " + results.get( 0 ) + ".";   
                 } else {
-                    response = StringUtils.capitalize(output_properties.get(0)) + " de " + entities.get(0) + " são ";
+                    response = capitalize(output_properties.get(0)) + " de " + entities.get(0) + " são ";
                     response += results.get(0);
                     for(int i = 1; i < results.size()-1; ++i){
                        response += ", " + results.get(i);
@@ -151,7 +150,7 @@ public class LaraParser {
                     results.addAll(o.executaPropriedade(entities.get(0), i.next()));
                 }
 
-                response = StringUtils.capitalize(output_properties.get( 0 ));
+                response = capitalize(output_properties.get( 0 ));
                 for ( int i = 1; i < output_properties.size() - 1; i++ ) {
                     response += ", " + output_properties.get( i );
                 }
@@ -171,5 +170,12 @@ public class LaraParser {
         }
         return( response );
     }
-    
+
+    public static String capitalize( String original ) {
+        if ( original == null || original.length() == 0 ) {
+            return original;
+        }
+        return original.substring( 0, 1 ).toUpperCase() + original.substring( 1 );
+    }    
+
 }
