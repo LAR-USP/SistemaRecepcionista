@@ -67,7 +67,7 @@ public class LaraParser {
         // 2ª lista: propriedades.
         ArrayList<String> properties = input.get( 1 );
         // 3ª lista: respostas.
-        ArrayList<String> results = input.get( 2 );
+        ArrayList<String> results = new ArrayList();//input.get( 2 );
 
         if ( entities.isEmpty() ) {
             if ( properties.isEmpty() ) {
