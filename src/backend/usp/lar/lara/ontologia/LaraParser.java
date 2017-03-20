@@ -29,20 +29,20 @@ public class LaraParser {
     public static ArrayList<String> obterPropriedades(String palavra) {
         ArrayList<String> propriedades = new ArrayList();
 
-        if (investiga.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        if (Investiga.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("investiga");
-        } else if (ficaEm.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        } else if ( FicaEm.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("ficaEm");
-        } else if (possuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        } else if (PossuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiRamal");
-        } else if (possuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        } else if (PossuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiEmail");
-        } else if (exerce.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        } else if (Exerce.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("exerce");
         } else if (palavra.equalsIgnoreCase("contato")) {
             propriedades.add("possuiRamal");
             propriedades.add("possuiEmail");
-        } else if (possuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)) {
+        } else if (PossuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("possuiCurrículo");
         }
         return propriedades;

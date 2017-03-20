@@ -26,7 +26,7 @@ public class Detect extends HttpServlet {
      * @param request Conteúdo da mensagem.
      * @param response Resposta a ser enviada de volta ao script.
      * @throws ServletException
-     * @throws IOException 
+     * @throws IOException
      */
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
