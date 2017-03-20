@@ -42,10 +42,10 @@ public class Ontologia {
             ontologiaICMC.verificaConsistencia();
             ontologiaICMC.showClasses();
             
-            System.out.println("\n\nWord Net\n\n");
-            ontologiaWordNet.loadWordNetBrOntology(new File(getClass().getResource("/Palavras.owl").getPath()));
-            ontologiaWordNet.verificaConsistencia();
-            ontologiaWordNet.showClasses();
+            //System.out.println("\n\nWord Net\n\n");
+            //ontologiaWordNet.loadWordNetBrOntology(new File(getClass().getResource("/Palavras.owl").getPath()));
+            //ontologiaWordNet.verificaConsistencia();
+            //ontologiaWordNet.showClasses();
             
         } catch (Exception e) {
             Logger.getLogger(Ontologia.class.getName()).log(Level.SEVERE, null, e);
@@ -80,7 +80,7 @@ public class Ontologia {
         return this.ontologiaICMC.getOntologyIndividualClasses(palavra);
     }
 
-    public boolean éEntitdade(String entitdade){
+    public boolean éEntidade(String entitdade){
         return ontologiaICMC.éEntidade(entitdade);
     }
     

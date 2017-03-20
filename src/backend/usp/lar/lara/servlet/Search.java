@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import usp.lar.lara.ontologia.LaraParser;
 import usp.lar.lara.ontologia.Ontologia;
 
 /**
@@ -24,21 +25,6 @@ public class Search extends HttpServlet{
         o = new Ontologia();
     }
 
-    public ArrayList<ArrayList<String>> parse(String frase){
-        String[] tokens = frase.split(" ");
-        ArrayList<String> individuos = null;
-        ArrayList<String> propriedades = new ArrayList();
-        propriedades.add("investiga");
-        for(int i = 0; i < tokens.length; ++i){
-            if(this.o.éEntitdade(tokens[i])){
-                individuos = o.executaPropriedade(tokens[i], "éChaveDe");
-            }
-        }
-        ArrayList<ArrayList<String>> result = new ArrayList();
-        result.add(individuos);
-        result.add(propriedades);
-        return result;
-    }
     /**
      * @brief Recebe um envio GET do AJAX em search.js.
      * @param request Conteúdo da mensagem.
@@ -66,18 +52,27 @@ public class Search extends HttpServlet{
 
         String pergunta = request.getParameter("content");
 
-        String[] parsed = this.parse(pergunta);
+        ArrayList<ArrayList<String>> parsed = LaraParser.parse(pergunta, this.o);
         
         String answer = "";
-        if(parsed[0] != "" && parsed[1] != ""){
-            ArrayList<String> result = o.executaPropriedade(parsed[0], parsed[1]);
-            if(result != null){
-                for (Iterator<String> it = result.iterator(); it.hasNext();) {
-                    String t = it.next();
-                    answer += t + " ";
+        if(parsed.get(0).size() > 0 && parsed.get(1).size() > 0){
+            for(Iterator<String> i = parsed.get(0).iterator(); i.hasNext();){
+                String indiv = i.next();
+                answer = answer.concat(indiv+":\n");
+                for(Iterator<String> j = parsed.get(1).iterator(); j.hasNext();){
+                    String prop = j.next();
+                    ArrayList<String> results = o.executaPropriedade(indiv, prop);
+                    if(results.size() > 0){
+                        answer = answer.concat(prop+":\n");
+                        for(Iterator<String> k = results.iterator(); k.hasNext();){
+                            answer = answer.concat(k.next()+"\n");
+                        }
+                    }
                 }
+                answer = answer.concat("\n");
             }
         }
+        
         response.getOutputStream().write(answer.getBytes("UTF-8"));
     }
 }

@@ -1,6 +1,7 @@
 package usp.lar.lara.ontologia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -8,6 +9,52 @@ import java.util.ArrayList;
  */
 public class LaraParser {
 
+    public static ArrayList<String> obterPropriedades(String palavra){
+        ArrayList<String> propriedades = new ArrayList();
+        ArrayList<String> investiga = new ArrayList(Arrays.asList("investiga", "pesquisa"));
+        ArrayList<String> ficaEm = new ArrayList(Arrays.asList("sala", "escritório", "escritorio"));
+        ArrayList<String> possuiRamal = new ArrayList(Arrays.asList("ramal", "telefone"));
+        ArrayList<String> possuiEmail = new ArrayList(Arrays.asList("email", "e-mail"));
+        ArrayList<String> exerce = new ArrayList(Arrays.asList("exerce", "cargo"));
+        ArrayList<String> possuiCurriculo = new ArrayList(Arrays.asList("currículo", "curriculo", "lattes"));
+
+        if(investiga.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("investiga");
+        }else if(ficaEm.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("ficaEm");
+        }else if(possuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("possuiRamal");
+        }else if(possuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("possuiEmail");
+        }else if(exerce.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("exerce");
+        }else if(palavra.equalsIgnoreCase("contato")){
+            propriedades.add("possuiRamal");
+            propriedades.add("possuiEmail");
+        }else if(possuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)){
+            propriedades.add("possuiCurrículo");
+        }
+        return propriedades;
+    }
+    public static ArrayList<ArrayList<String>> parse(String frase, Ontologia o){
+        String[] tokens = frase.split(" ");
+        ArrayList<String> individuos = new ArrayList();
+        ArrayList<String> propriedades = new ArrayList();
+        for(int i = 0; i < tokens.length; ++i){
+            ArrayList<String> prop = obterPropriedades(tokens[i]);
+            if(prop.size() > 0 && !prop.get(0).equals("")){
+                System.out.println(prop.toString());
+                propriedades.addAll(prop);
+            }else if(o.éEntidade(tokens[i])){
+                individuos.addAll(o.executaPropriedade(tokens[i], "éChaveDe"));
+                System.out.println(individuos.toString());
+            }
+        }
+        ArrayList<ArrayList<String>> result = new ArrayList();
+        result.add(individuos);
+        result.add(propriedades);
+        return result;
+    }
     /**
      * @param input Resposta do Parser.
      * @return Resposta formatada.
