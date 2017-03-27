@@ -55,17 +55,22 @@ public class LaraParser {
      * @return List of entities and properties.
      */
     public static ArrayList<ArrayList<String>> parse( String frase, Ontologia o ) {
+        frase = frase.replace("."," ");
+        frase = frase.replace(","," ");
+        frase = frase.replace(";"," ");
         String[] tokens = frase.split(" ");
         ArrayList<String> individuos = new ArrayList();
         ArrayList<String> propriedades = new ArrayList();
         for ( String token : tokens ) {
             ArrayList<String> prop = obterPropriedades( token );
             if ( prop.size() > 0 && !prop.get(0).equals("") ) {
-                System.out.println( prop.toString() );
                 propriedades.addAll( prop );
             } else if ( o.éEntidade( token ) ) {
-                individuos.addAll( o.executaPropriedade( token, "éChaveDe" ) );
-                System.out.println( individuos.toString() );
+                if( individuos.isEmpty() ){
+                    individuos.addAll( o.executaPropriedade( token, "éChaveDe" ) );
+                } else {
+                    individuos.retainAll( o.executaPropriedade(token, "éChaveDe") );
+                }
             }
         }
         ArrayList<ArrayList<String>> result = new ArrayList();
@@ -90,17 +95,17 @@ public class LaraParser {
 
         ArrayList<String> output_properties = new ArrayList();
         for(int i = 0; i < properties.size(); ++i){
-            if(properties.get(i) == "investiga"){
+            if("investiga".equals(properties.get(i))){
                 output_properties.add("pesquisa");
-            } else if(properties.get(i) == "ficaEm"){
+            } else if("ficaEm".equals(properties.get(i))){
                 output_properties.add("sala");
-            } else if(properties.get(i) == "possuiRamal"){
+            } else if("possuiRamal".equals(properties.get(i))){
                 output_properties.add("ramal");
-            } else if(properties.get(i) == "possuiEmail"){
+            } else if("possuiEmail".equals(properties.get(i))){
                 output_properties.add("email");
-            } else if(properties.get(i) == "possuiCurrículo"){
+            } else if("possuiCurrículo".equals(properties.get(i))){
                 output_properties.add("currículo");
-            } else if(properties.get(i) == "exerce"){
+            } else if("exerce".equals(properties.get(i))){
                 output_properties.add("cargo");
             }
         }
