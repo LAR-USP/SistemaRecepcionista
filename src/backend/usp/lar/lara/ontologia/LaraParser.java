@@ -162,7 +162,8 @@ public class LaraParser {
             }
         }
         else { // Ambiguous entities.
-            response = "Sobre o quê ou quem gostaria de saber? " + entities.get( 0 );
+            response = "Sobre o quê ou quem gostaria de saber? \n\r";
+            response = response + entities.get( 0 );
             for ( int i = 1; i < entities.size() - 1; i++ ) {
                 response += ", " + entities.get( i );
             }
