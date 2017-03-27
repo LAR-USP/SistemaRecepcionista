@@ -47,6 +47,7 @@ public class Search extends HttpServlet{
         throws ServletException, IOException {
 
         String pergunta = request.getParameter("content");
+        if ( pergunta.isEmpty() ) return;
 
         ArrayList<ArrayList<String>> parsed = LaraParser.parse( pergunta, this.o );
 

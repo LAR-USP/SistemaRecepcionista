@@ -13,8 +13,8 @@ $(document).on('input', '#searchbar', function(){
             data:{content:str},
             type:'get',
             cache:false,
-            success:function(data){
-                $('#results').text(data); 
+            success:function(data) {
+                $('#results').html(data);
             },
         error:function(){
             alert('error');
