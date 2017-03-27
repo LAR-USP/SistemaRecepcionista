@@ -5,6 +5,8 @@ function reset(){
     $('#searchbar').blur();
     $('#results').css('top', '60%');
     $('#searchdiv').css('top', '50%');
+    entity = "";
+    properties = "";
     if(recognition !== null){
         recognition.stop();
         recognition = null;
