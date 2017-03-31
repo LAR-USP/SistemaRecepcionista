@@ -3,11 +3,24 @@
 
 var ultima_entidade = "";
 var ultima_propriedade = "";
+var acesso = 0;
 
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
     $("#searchdiv").css('top', '0%');
     $("#results").css('top', '10%');
+    
+    if(acesso == 0){
+        $("#laraface").fadeOut(function(){
+            $("#laraface").css('height', '50px');
+            $("#laraface").css('width', '50px');
+            $("#laraface").css('position', 'absolute');
+            $("#laraface").css('top', '0.5%');
+        });
+        $("#laraface").fadeIn();
+        acesso = 1;
+    }
+
     $.ajax({
             url:'Search',
             data:{content:str},

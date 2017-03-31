@@ -8,17 +8,28 @@
         <script type="text/javascript" src="js/search.js"></script>
         <script type="text/javascript" src="js/detect.js"></script>
         <script type="text/javascript" src="js/reset.js"></script>
+        <script type="text/javascript" src="js/calendar.js"></script>
+    
+
     </head>
     <body>
+        
+        <img id="laraface" src="img/sorriso.png"/>
+
         <div id="searchdiv">
             <form id="searchform">
                 <input type="text" id="searchbar"/>
-                <img id="barspeech" onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />
+                <img id="barspeech" onclick="startDictation()" src="img/mic.gif" />
 <!--                <input type="submit" id="submit" name="search" value="P"/> -->
-            </form>
+            </form> 
+
         </div>
         <div id="results">
         </div>
+        
+        <iframe id="calendarframe" src="https://calendar.google.com/calendar/embed?src=hikaro.15%40gmail.com&ctz=America/Sao_Paulo"
+             frameborder="0" scrolling="no"> 
+        </iframe> 
     </body>
 </html>
 

@@ -3,8 +3,20 @@ function reset(){
     $('#results').text("");
     $('#searchbar').val("");
     $('#searchbar').blur();
-    $('#results').css('top', '60%');
-    $('#searchdiv').css('top', '50%');
+    $('#results').css('top', '40%');
+    $('#searchdiv').css('top', '30%');
+    
+    if(acesso == 1){
+        $("#laraface").fadeOut(function(){
+            $("#laraface").css('height', '150px');
+            $("#laraface").css('width', '150px');
+            $("#laraface").css('position', 'relative');
+            $("#laraface").css('top', '180px');
+        });
+        $("#laraface").fadeIn();
+        acesso = 0;
+    }
+
     if(recognition !== null){
         recognition.stop();
         recognition = null;
@@ -12,7 +24,7 @@ function reset(){
     idle_time = 0;
 }
 
-var IDLE_MAX = 600; // Segundos.
+var IDLE_MAX = 5; // Segundos.
 var idle_time = 0; // Segundos.
 
 $(window).on('click mousemove keypress input', function(){
