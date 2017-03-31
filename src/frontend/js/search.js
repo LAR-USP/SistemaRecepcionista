@@ -5,6 +5,9 @@ var ultima_entidade = "";
 var ultima_propriedade = "";
 var acesso = 0;
 
+var entity = "";
+var properties = "";
+
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
     $("#searchdiv").css('top', '0%');
@@ -23,11 +26,15 @@ $(document).on('input', '#searchbar', function(){
 
     $.ajax({
             url:'Search',
-            data:{content:str},
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data:{content:str, entity:entity, properties:properties},
             type:'get',
             cache:false,
             success:function(data){
-                $('#results').text(data); 
+                $('#results').html(data.answer);
+                entity = data.entity;
+                properties = JSON.stringify(data.properties);
             },
         error:function(){
             alert('error');

@@ -17,7 +17,9 @@ function reset(){
         acesso = 0;
     }
 
-    if(recognition !== null){
+    entity = "";
+    properties = "";
+	if(recognition !== null){
         recognition.stop();
         recognition = null;
     }
