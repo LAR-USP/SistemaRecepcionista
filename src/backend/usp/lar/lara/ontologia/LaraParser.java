@@ -86,7 +86,7 @@ public class LaraParser {
      * @return Resposta formatada.
      */
     public static String formatResponse( ArrayList<ArrayList<String>> input, Ontologia o ) {
-        String response = null;
+        String response = "";
 
         // 1ª lista: entidades.
         ArrayList<String> entities = input.get( 0 );
@@ -110,15 +110,11 @@ public class LaraParser {
             }
         }
         if ( entities.isEmpty() ) {
-            if ( output_properties.isEmpty() ) {
-                // Not found.
-                response = "Desculpe, não sei sobre este assunto.";
-            }
-            else if ( output_properties.size() == 1 ) {
+            if ( output_properties.size() == 1 ) {
                 // Not found.
                 response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 ) + "?";
             }
-            else { // More than one property about something.
+            else if ( !output_properties.isEmpty() ){ // More than one property about something.
                 response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 );
                 for ( int i = 1; i < output_properties.size() - 1; i++ ) {
                     response = response + ", " + output_properties.get( i );
