@@ -35,4 +35,22 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $("#newsimg").mousedown(function(){
+        $("div.overlayNews").fadeIn("fast", function(){
+            $("div.overlay").css('display', 'block');
+        });
+
+    });
+});
+
+$(document).ready(function(){
+    $("div.overlayNews").mousedown(function(){
+        $("div.overlayNews").fadeOut("fast", function(){
+            $("div.overlayNews").css('display', 'none');
+        });
+
+    });
+});
+
 
