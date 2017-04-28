@@ -72,9 +72,7 @@ public class LaraParser {
      * @return List of entities and properties.
      */
     public static ArrayList<ArrayList<String>> parseOntology( String frase, Ontologia o ) {
-        frase = frase.replace("."," ");
-        frase = frase.replace(","," ");
-        frase = frase.replace(";"," ");
+        frase = frase.replaceAll("\\.|,|;|:|\\?|!|\"|\\(|\\)|\\*|'", " ");
         String[] tokens = frase.split(" ");
         ArrayList<String> individuos = new ArrayList();
         ArrayList<String> propriedades = new ArrayList();
@@ -82,11 +80,14 @@ public class LaraParser {
             ArrayList<String> prop = obterPropriedades( token );
             if ( prop.size() > 0 && !prop.get(0).equals("") ) {
                 propriedades.addAll( prop );
-            } else if ( o.éEntidade( token ) ) {
-                if ( individuos.isEmpty() ) {
-                    individuos.addAll( o.executaPropriedade( token, "éChaveDe" ) );
-                } else {
-                    individuos.retainAll( o.executaPropriedade(token, "éChaveDe") );
+            } else {
+                ArrayList<String> new_indiv = o.executaPropriedade(token, "éChaveDe");
+                if(!new_indiv.isEmpty()){
+                    if ( individuos.isEmpty() ) {
+                        individuos.addAll( new_indiv );
+                    } else {
+                        individuos.retainAll( new_indiv );
+                    }
                 }
             }
         }
@@ -126,7 +127,7 @@ public class LaraParser {
                 output_properties.add("cargo");
             }
         }
-        if ( entities.isEmpty() ) {
+        if ( entities.isEmpty()  || (entities.size() == 1 && entities.get(0) == "")) {
             if ( output_properties.size() == 1 ) {
                 // Not found.
                 response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 ) + "?";
