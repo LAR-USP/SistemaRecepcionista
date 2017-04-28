@@ -7,6 +7,7 @@ var acesso = 0;
 
 var entity = "";
 var properties = "";
+var previous_answer = "";
 
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
@@ -33,6 +34,10 @@ $(document).on('input', '#searchbar', function(){
             cache:false,
             success:function(data){
                 $('#results').html(data.answer);
+                if(previous_answer !== data.answer && data.answer != null && data.answer != ""){
+                    previous_answer = data.answer;
+                    mySpeak(data.answer);
+                }
                 entity = data.entity;
                 properties = JSON.stringify(data.properties);
             },

@@ -1,5 +1,5 @@
 // Diz uma mensagem.
-function speak( text, callback )
+function mySpeak( text, callback )
 {
 	var u = new SpeechSynthesisUtterance();
 	u.text = text;

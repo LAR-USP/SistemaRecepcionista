@@ -53,7 +53,7 @@ public class Ontologia {
         }
     }
 
-    public ArrayList<String> executaPropriedade(String individuo, String propriedade){
+    public ArrayList<String> executaPropriedade(String individuo, String propriedade) {
         return ontologiaICMC.executeProperty(individuo, propriedade);
     }
     
