@@ -1,4 +1,4 @@
-package usp.lar.lara.ontologia;
+package usp.lar.lara.ontology;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +17,8 @@ public class LaraParser {
     private static final ArrayList<String> Exerce;
     private static final ArrayList<String> PossuiCurriculo;
 
+    public static enum Type{ ONTOLOGY, CALENDAR };
+
     // Bloco de inicialização de variáveis estáticas.
     static {
         Investiga = new ArrayList(Arrays.asList("investiga", "pesquisa"));
@@ -25,6 +27,21 @@ public class LaraParser {
         PossuiEmail = new ArrayList(Arrays.asList("email", "e-mail"));
         Exerce = new ArrayList(Arrays.asList("exerce", "cargo"));
         PossuiCurriculo = new ArrayList(Arrays.asList("currículo", "curriculo", "lattes"));
+    }
+
+    public static Type requestType(String pergunta){
+        ArrayList<String> CalendarKeywords = new ArrayList(Arrays.asList("dia", "quando", "semana", "hora", "horário", "horario", "mês", "mes", "ano", "evento", "eventos", "manhã", "manha", "tarde", "noite", "hoje", "amanha", "amanhã"));
+        pergunta = pergunta.replace("."," ");
+        pergunta = pergunta.replace(","," ");
+        pergunta = pergunta.replace(";"," ");
+        ArrayList<String> tokens = new ArrayList(Arrays.asList(pergunta.split(" ")));
+        Iterator<String> t = tokens.iterator();
+        while(t.hasNext()){
+            if(CalendarKeywords.stream().anyMatch(t.next()::equalsIgnoreCase)){
+                return Type.CALENDAR;
+            }
+        }
+        return Type.ONTOLOGY;
     }
 
     public static ArrayList<String> obterPropriedades(String palavra) {
@@ -54,7 +71,7 @@ public class LaraParser {
      * @param o Ontology to be accessed.
      * @return List of entities and properties.
      */
-    public static ArrayList<ArrayList<String>> parse( String frase, Ontologia o ) {
+    public static ArrayList<ArrayList<String>> parseOntology( String frase, Ontologia o ) {
         frase = frase.replace("."," ");
         frase = frase.replace(","," ");
         frase = frase.replace(";"," ");

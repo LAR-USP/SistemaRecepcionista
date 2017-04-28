@@ -1,4 +1,4 @@
-package usp.lar.lara.ontologia;
+package usp.lar.lara.ontology;
 
 import java.io.File;
 import java.io.IOException;
