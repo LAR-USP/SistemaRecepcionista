@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>LARA - Laboratório de Aprendizado de Robôs Assistente</title>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Slabo+27px" rel="stylesheet">
         <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
         <script type="text/javascript" src="js/speech-synthesis.js"></script>
         <script type="text/javascript" src="js/search.js"></script>
@@ -29,8 +30,33 @@
             <p id="results"></p>
         </div>
 
-        <iframe id="calendarframe" src="https://calendar.google.com/calendar/embed?src=ej1el72rq8ag0v5b3ef19leh24%40group.calendar.google.com&#038;ctz=America/Sao_Paulo"
+        <img id="calendarimg" src="img/calendar.png"/>
+
+        <img id="profileimg" src="img/profile.png"/>
+        
+        <div class="overlayCalendar">
+            <iframe id="calendarframe" src="https://calendar.google.com/calendar/embed?src=ej1el72rq8ag0v5b3ef19leh24%40group.calendar.google.com&#038;ctz=America/Sao_Paulo"
              frameborder="0" scrolling="no">
-        </iframe> 
+            </iframe> 
+        </div>
+
+        <div class="overlayProfile">
+        	<div id="profilediv" align="center">
+                <div id= "generalProfile" align="center">
+                    <img id = "profilePicture" src="img/profile-picture.png">
+                    <p id="getName"> Roseli Aparecida</p>
+                </div>
+
+                <div id= "specificProfile" align="center">
+                    <p id="details"> Detalhes do contato: </p>
+                    <p id="room"> Sala: 5304</p>
+                    <p id="telephone"> Telefone: (16)3353-1689</p>
+                    <p id="email"></p>
+                </div>
+
+                <p> Detalhes do contato </p>
+
+        	</div>
+        </div>
     </body>
 </html>
