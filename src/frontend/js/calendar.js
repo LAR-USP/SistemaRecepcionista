@@ -1,17 +1,38 @@
 $(document).ready(function(){
     $("#calendarimg").mousedown(function(){
-		$("#overlay").fadeIn("fast", function(){
-            $("#overlay").css('display', 'block');
+		$("div.overlayCalendar").fadeIn("fast", function(){
+            $("div.overlay").css('display', 'block');
         });
 
     });
 });
 
 $(document).ready(function(){
-    $("#overlay").mousedown(function(){
-		$("#overlay").fadeOut("fast", function(){
-            $("#overlay").css('display', 'none');
+    $("#profileimg").mousedown(function(){
+		$("div.overlayProfile").fadeIn("fast", function(){
+            $("div.overlayProfile").css('display', 'block');
         });
 
     });
 });
+
+
+$(document).ready(function(){
+    $("div.overlayCalendar").mousedown(function(){
+		$("div.overlayCalendar").fadeOut("fast", function(){
+            $("div.overlayCalendar").css('display', 'none');
+        });
+
+    });
+});
+
+$(document).ready(function(){
+    $("div.overlayProfile").mousedown(function(){
+        $("div.overlayProfile").fadeOut("fast", function(){
+            $("div.overlayProfile").css('display', 'none');
+        });
+
+    });
+});
+
+
