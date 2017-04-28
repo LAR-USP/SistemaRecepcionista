@@ -145,7 +145,7 @@ public class OntologyICMC {
         OWLObjectProperty propriedadeOWL = factory.getOWLObjectProperty(IRI.create(ontologyIRI
                 + "#" + propriedade));
 
-        NodeSet<OWLNamedIndividual> individuos = this.reasoner.getObjectPropertyValues(indivíduoOWL, propriedadeOWL);
+        NodeSet<OWLNamedIndividual> individuos = this.reasoner.getObjectPropertyValues( indivíduoOWL, propriedadeOWL );
         Iterator<Node<OWLNamedIndividual>> i = individuos.iterator();
         while (i.hasNext()) {
             OWLNamedIndividual individuo = i.next().getRepresentativeElement();

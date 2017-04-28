@@ -66,7 +66,7 @@ public class LaraParser {
             if ( prop.size() > 0 && !prop.get(0).equals("") ) {
                 propriedades.addAll( prop );
             } else if ( o.éEntidade( token ) ) {
-                if( individuos.isEmpty() ){
+                if ( individuos.isEmpty() ) {
                     individuos.addAll( o.executaPropriedade( token, "éChaveDe" ) );
                 } else {
                     individuos.retainAll( o.executaPropriedade(token, "éChaveDe") );
