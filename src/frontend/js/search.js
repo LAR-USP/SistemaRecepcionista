@@ -46,22 +46,22 @@ $(document).on('input', '#searchbar', function(){
         }
     });
 
-    $.ajax({
-            url:'Search',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data:{content:str, entity:entity, properties: possuiEmail},
-            type:'get',
-            cache:false,
-            success:function(data){
-                entity = data.entity;
-                properties = JSON.stringify(data.properties);
-                $('#email').html(data.properties);
-            },
-        error:function(){
-            alert('error');
-        }
-    });
+    // $.ajax({
+    //         url:'Search',
+    //         dataType: 'json',
+    //         contentType: "application/json; charset=utf-8",
+    //         data:{content:str, entity:entity, properties: possuiEmail},
+    //         type:'get',
+    //         cache:false,
+    //         success:function(data){
+    //             entity = data.entity;
+    //             properties = JSON.stringify(data.properties);
+    //             $('#email').html(data.properties);
+    //         },
+    //     error:function(){
+    //         alert('error');
+    //     }
+    // });
 
 });
 

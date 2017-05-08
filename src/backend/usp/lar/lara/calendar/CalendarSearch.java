@@ -149,13 +149,64 @@ public class CalendarSearch {
         // Resultado
         List<Event> items = CalendarSearch.search(date, time).getItems();
         if(!items.isEmpty()) {
+            answer += "<table>";
+            String dates = "";
+            String event_list = "";
+            int row_char_count = 0;
+            int column_max = 0;
+            Calendar current = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
+            int p_day = 0;
+            int p_month = 0;
+            int p_year = 0;
+            dates += "<tr>";
+            event_list += "<tr><td><table>";
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
                 if (start == null) {
                     start = event.getStart().getDate();
                 }
-                answer += event.getSummary() + " (" + start + ") <br />";
+                current.setTimeInMillis(start.getValue());
+                int c_day = current.get(Calendar.DAY_OF_MONTH);
+                int c_month = current.get(Calendar.MONTH);
+                int c_year = current.get(Calendar.YEAR);
+                int c_hour = current.get(Calendar.HOUR_OF_DAY);
+                int c_minutes = current.get(Calendar.MINUTE);
+                if(c_day != p_day || c_month != p_month || c_year != p_year){
+                    p_day = c_day;
+                    p_month = c_month;
+                    p_year = c_year;
+                    if(column_max != 0){
+                        row_char_count += column_max + 7;
+                        column_max = 0;
+                        System.out.println(row_char_count);
+                    }
+                    if(row_char_count > 100){
+                        dates += "</tr>";
+                        event_list += "</table></td>";
+                        answer += dates+event_list;
+                        dates = "<tr>";
+                        event_list = "<tr><td><table>";
+                        row_char_count = 0;
+                    } else {
+                        if(!event_list.equals("<tr><td><table>")){
+                            event_list += "</table></td><td><table>";
+                        }
+                    }
+                    dates += "<th>"+String.format("%02d", p_day)+"/"
+                                +String.format("%02d", p_month+1)+"/"
+                                +p_year+"</th>";
+                }
+                String summary = event.getSummary();
+                if(summary.length() > column_max){
+                    column_max = summary.length();
+                }
+                event_list += "<tr><td>"+summary+"</td><td>"
+                                + "("+String.format("%02d", c_hour)+":"
+                                    +String.format("%02d", c_minutes)+")</td><tr>";
             }
+            dates += "</tr>";
+            event_list += "</table></td></tr>";
+            answer += dates+event_list+"</table>";
         }
         
         rv.addProperty("answer", answer);
