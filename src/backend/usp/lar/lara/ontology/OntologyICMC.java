@@ -150,7 +150,7 @@ public class OntologyICMC {
         while (i.hasNext()) {
             OWLNamedIndividual individuo = i.next().getRepresentativeElement();
 
-            instancias.add(individuo.getIRI().getFragment().replaceAll("_", " "));
+            instancias.add(individuo.getIRI().toURI().getFragment().replaceAll("_", " "));
         }
 
         return instancias;
