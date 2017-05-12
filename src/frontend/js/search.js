@@ -36,7 +36,7 @@ $(document).on('input', '#searchbar', function(){
                 $('#results').html(data.answer);
                 if(previous_answer !== data.answer && data.answer != null && data.answer != ""){
                     previous_answer = data.answer;
-                    mySpeak(data.answer);
+                    mySpeak(data.voice);
                 }
                 entity = data.entity;
                 properties = JSON.stringify(data.properties);

@@ -79,6 +79,8 @@ public class CalendarSearch {
         }
     }
 
+    private static ArrayList<String> meses = new ArrayList(Arrays.asList("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"));
+
     /**
      * Creates an authorized Credential object.
      * @return an authorized Credential object.
@@ -130,6 +132,7 @@ public class CalendarSearch {
 
     public static JsonObject getList(String pergunta) throws IOException {
         String answer = "";
+        String voice = "";
         ArrayList<String> tokens = new ArrayList(Arrays.asList(pergunta.split(" ")));
         JsonObject rv= new JsonObject();
         String date = "";
@@ -178,7 +181,6 @@ public class CalendarSearch {
                     if(column_max != 0){
                         row_char_count += column_max + 7;
                         column_max = 0;
-                        System.out.println(row_char_count);
                     }
                     if(row_char_count > 100){
                         dates += "</tr>";
@@ -186,6 +188,7 @@ public class CalendarSearch {
                         answer += dates+event_list;
                         dates = "<tr>";
                         event_list = "<tr><td><table>";
+                        voice += ". ";
                         row_char_count = 0;
                     } else {
                         if(!event_list.equals("<tr><td><table>")){
@@ -195,6 +198,7 @@ public class CalendarSearch {
                     dates += "<th>"+String.format("%02d", p_day)+"/"
                                 +String.format("%02d", p_month+1)+"/"
                                 +p_year+"</th>";
+                    voice += "Dia "+p_day+" de "+CalendarSearch.meses.get(p_month)+" de "+p_year+": ";
                 }
                 String summary = event.getSummary();
                 if(summary.length() > column_max){
@@ -203,6 +207,15 @@ public class CalendarSearch {
                 event_list += "<tr><td>"+summary+"</td><td>"
                                 + "("+String.format("%02d", c_hour)+":"
                                     +String.format("%02d", c_minutes)+")</td><tr>";
+                if(!voice.endsWith(": ")){
+                    voice += ", ";
+                }
+                voice += summary + " às " + c_hour + " horas";
+                if(c_minutes == 30){
+                    voice += " e meia";
+                } else if(c_minutes != 0){
+                    voice += " e " + c_minutes + "minutos";
+                }
             }
             dates += "</tr>";
             event_list += "</table></td></tr>";
@@ -210,6 +223,7 @@ public class CalendarSearch {
         }
         
         rv.addProperty("answer", answer);
+        rv.addProperty("voice", voice);
         rv.addProperty("entity", "");
         rv.add("properties", new JsonArray());
         return rv;

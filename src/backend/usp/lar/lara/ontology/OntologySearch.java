@@ -51,6 +51,8 @@ public class OntologySearch {
         
         JsonObject rv = new JsonObject();
         rv.addProperty("answer", answer);
+        String voice = answer.replaceAll("\\<br\\>|\\<ul\\>|\\</ul\\>|\\<li\\>", "").replaceAll("\\</li\\>", ", ");
+        rv.addProperty("voice", voice);
         rv.addProperty("entity", entidade);
         rv.add("properties", novas_props);
 
