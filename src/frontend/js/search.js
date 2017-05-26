@@ -8,6 +8,7 @@ var acesso = 0;
 var entity = "";
 var properties = "";
 var previous_answer = "";
+var sala = "FicaEm";
 
 $(document).on('input', '#searchbar', function(){
     var str = $("#searchbar").val();
@@ -16,15 +17,30 @@ $(document).on('input', '#searchbar', function(){
     
     if(acesso == 0){
         $("#laraface").fadeOut(function(){
-            $("#laraface").css('height', '50px');
-            $("#laraface").css('width', '50px');
+            $("#laraface").css('height', '55px');
+            $("#laraface").css('width', '55px');
             $("#laraface").css('position', 'absolute');
             $("#laraface").css('top', '0.5%');
         });
         $("#laraface").fadeIn();
         acesso = 1;
     }
-
+    
+    $.ajax({
+             url:'Search',
+             dataType: 'json',
+             contentType: "application/json; charset=utf-8",
+             data:{content:str, entity:entity, properties:properties},
+             type:'get',
+             cache:false,
+             success:function(data){
+                 $('#room').html(data.properties);
+             },
+         error:function(){
+             alert('error');
+         }
+    });
+    
     $.ajax({
             url:'Search',
             dataType: 'json',
@@ -45,24 +61,6 @@ $(document).on('input', '#searchbar', function(){
             alert('error');
         }
     });
-
-    // $.ajax({
-    //         url:'Search',
-    //         dataType: 'json',
-    //         contentType: "application/json; charset=utf-8",
-    //         data:{content:str, entity:entity, properties: possuiEmail},
-    //         type:'get',
-    //         cache:false,
-    //         success:function(data){
-    //             entity = data.entity;
-    //             properties = JSON.stringify(data.properties);
-    //             $('#email').html(data.properties);
-    //         },
-    //     error:function(){
-    //         alert('error');
-    //     }
-    // });
-
 });
 
 var recogntion = null;

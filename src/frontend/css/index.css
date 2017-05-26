@@ -6,6 +6,7 @@ html, body{
     min-height: 100%;
     min-width: 100%;
     overflow: hidden;
+    background-color: white;
 }
 
 /*Ajusta posição e tamanho da imagem de recepcionista*/
@@ -13,9 +14,9 @@ html, body{
 #laraface{
     display:block;
     position:relative;
-    height:150px;
-    width:150px;
-    top:180px;
+    height: 22.2%;
+    width: 11.2%;
+    top: 25%;
     margin: 0  auto;
 }
 
@@ -25,80 +26,99 @@ mudar de posição. Transition faz com que mude para o
 topo com tempo de 0.5s de modo ease-in*/
 #searchdiv{
     position: relative;
-    top: 30%;
+    top: 28%;
     width: 100%;
     height: 6%;
     display: block;
     text-align: center;
     transition: top 0.5s ease-in;
+    
+}
+
+#container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 100%;
+    border: 2px solid lightgray;
+    transition: border 0.4s ease-in-out;
+    border-radius: 25px;
+    background-color: lightgray;
 }
 
 /*Configura o form, usando inline-block para poder
 disponibilizar as caixas flutuantes em linha e 
 preservando as propriedades dos blocos*/
 #searchform{
-    padding: 0;
     display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    height: 100%;
+    padding: 0;
+    width: 90%;
+    height: 97.2%;
     font-size: 0px;
     background-color: white;
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    outline: 0;
+    transform: translate(-1.3%, -4%);
+    transition: border 0.4s ease-in-out;
+    padding-top: 0.3px;
 }
 
 #searchbar{
     display: inline-block;
     float: left; /*faz com que searchbar fique a esquerda,
                  dentro do searchform*/
-    padding-left: 1%;
+    padding-left: 3%;
     font-size: 20px;
-    width: 92%;
-    height: 94%;
+    width: 100%;
+    height: 98%;
     border: 2px solid lightgray;
     outline: none;
+    border-radius: 25px;
+    transform: translate(-0.7%, -6.1%);
     transition: border 0.4s ease-in-out;
-    border-right:none;
 }
 
 #barspeech{
+    display: block;
+    float: right;
+    margin-right: 1.3%;
     width: 6%;
     height: 100%;
     border: 0;
-    float: left;
-    border: 2px solid lightgray;
-    transition: border 0.4s ease-in-out;
-    border-left:none;
+    outline: 0;
 }
 
 #calendarimg{
     display: inline-block;
     position:absolute;
     margin-left: 30%;
-    top:415px;
+    top: 61.8%;
     border: 0;
-    width: 128px;
-    height: 128px;
+    width: 107px;
+    height: 107px;
 }
 
 #profileimg{
     display: inline-block;
     position:absolute;
-    margin-left: 45%;
-    top:420px;
+    margin-left: 45.7%;
+    top:62%;
     border: 0;
-    height: 120px;
+    width: 106px;
+    height: 106px;
 }
 
 #newsimg{
     display: inline-block;
     position:absolute;
     margin-left: 60%;
-    top:425px;
+    top: 61.2%;
     border: 0;
-    height: 120px;
-    width: 100px;
-    height: 100px;
+    width: 128px;
+    height: 128px;
 }
 
 #calendarframe{
@@ -120,17 +140,6 @@ preservando as propriedades dos blocos*/
     top: 5%;
     left: 32%;
     width: 840px;
-    /*height: 400px;*/
-}
-
-#searchbar:focus{
-    border: 2px solid gray;
-    border-right:none;
-}
-
-#searchbar:focus ~ #barspeech{
-    border: 2px solid gray;
-    border-left:none;
 }
 
 #submit{
@@ -208,7 +217,7 @@ div.overlayNews{
     left:30%;
     width: 500px;
     height:300px;
-    
+    border-radius: 15px;
 }
 
 #generalProfile{
@@ -217,6 +226,7 @@ div.overlayNews{
     left:30%;
     width: 500px;
     height:150px;
+    border-radius: 15px;
     background-color: rgb(245, 245, 245);
 }
 
@@ -249,6 +259,7 @@ div.overlayNews{
     width: 500px;
     height:150px;
     bottom: 0;
+    border-radius: 15px;
 }
 
 #details{

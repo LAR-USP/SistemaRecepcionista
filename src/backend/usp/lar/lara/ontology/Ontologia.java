@@ -20,21 +20,6 @@ public class Ontologia {
         this.ontologiaWordNet = new OntologyWordNetBr();
         this.ontologiaICMC = new OntologyICMC();
 
-
-        //        try {
-        //            ontologia.createOntology(new File("Palavras.owl"));
-        //            //ontologia.loadWordNetBrOntology(new File("Palavras.owl"));
-        //            criaTodasPalavras(ontologia);
-        //            ontologia.verificaConsistencia();
-        //            ontologia.showClasses();
-        //            //ontologia.ontologyWalker();
-        //            ontologia.saveOntology();
-        //            System.out.println("Sinionimos");
-        //            ontologia.getSinonimos("esquema");
-        //
-        //        } catch (Exception e) {
-        //            Logger.getLogger(Ontologia.class.getName()).log(Level.SEVERE, null, e);
-        //        }
         try {
             System.out.println("\n\nICMC\n\n");
             //Icmc.owl

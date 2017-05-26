@@ -16,28 +16,29 @@
     <body>
 
         <img id="laraface" src="img/Lara.png" alt="Rosto da recepcionista" />
-
-        <div id="searchdiv">
-            <form id="searchform">
-                <input type="text" id="searchbar"/>
+        
+       <div id="searchdiv">
+            <div id ="container">
+                <form id="searchform">
+                    <input type="text" id="searchbar"/>
+                </form> 
                 <img id="barspeech" onclick="startDictation()" src="img/mic.gif" alt="Imagem de microfone" />
-<!--                <input type="submit" id="submit" name="search" value="P"/> -->
-            </form> 
-
-        </div>
+<!--            <input type="submit" id="submit" name="search" value="P"/> -->
+            </div>
+       </div>
         <div id="resultsdiv">
             <p id="results"></p>
         </div>
 
         <img id="calendarimg" src="img/calendar.png"/>
 
-        <img id="profileimg" src="img/profile.png"/>
+        <img id="profileimg" src="img/profile-picture.png"/>
 
         <img id="newsimg" src="img/news.png"/>
         
         <div class="overlayCalendar">
             <iframe id="calendarframe" src="https://calendar.google.com/calendar/embed?src=ej1el72rq8ag0v5b3ef19leh24%40group.calendar.google.com&#038;ctz=America/Sao_Paulo"
-             frameborder="0" scrolling="no">
+             style = "border-radius: 15px" frameborder="0" scrolling="no">
             </iframe> 
         </div>
 
@@ -51,8 +52,8 @@
                 <div id= "specificProfile" align="center">
                     <p id="details"> Detalhes do contato: </p>
                     <p id="room"> Sala: 5304</p>
-                    <p id="telephone"> Telefone: (16)3353-1689</p>
-                    <p id="email"></p>
+                   <!-- <p id="telephone"> Telefone: (16)3353-1689</p>
+                    <p id="email"></p> -->
                 </div>
 
                 <p> Detalhes do contato </p>
@@ -61,7 +62,7 @@
         </div>
 
         <div class="overlayNews">
-        	<iframe id="newsframe" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCRob.USP%2F&tabs=timeline&width=840&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        	<iframe id="newsframe" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCRob.USP%2F&tabs=timeline&width=840&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" height="600" style="overflow:hidden; border-radius:15px" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
         </div>
 
     </body>
