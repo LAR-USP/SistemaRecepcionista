@@ -354,9 +354,9 @@ public class OntologyICMC {
         Set<OWLClass> unsatisfiable = bottomNode.getEntitiesMinusBottom();
         if (!unsatisfiable.isEmpty()) {
             System.out.println("The following classes are unsatisfiable: ");
-            for (OWLClass cls : unsatisfiable) {
+            unsatisfiable.forEach((cls) -> {
                 System.out.println("    " + cls);
-            }
+            });
         } else {
             System.out.println("There are no unsatisfiable classes");
         }
@@ -386,9 +386,9 @@ public class OntologyICMC {
         // The ontology will now contain references to class A and class B -
         // that is, class A and class B are contained within the SIGNATURE of
         // the ontology let's print them out
-        for (OWLClass cls : ontology.getClassesInSignature()) {
+        ontology.getClassesInSignature().forEach((cls) -> {
             System.out.println("Referenced class: " + cls);
-        }
+        });
 
     }
 }

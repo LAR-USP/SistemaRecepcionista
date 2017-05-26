@@ -28,6 +28,7 @@ public class Detect extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
@@ -41,6 +42,7 @@ public class Detect extends HttpServlet {
      * @throws ServletException
      * @throws IOException 
      */
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 

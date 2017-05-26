@@ -127,7 +127,7 @@ public class LaraParser {
                 output_properties.add("cargo");
             }
         }
-        if ( entities.isEmpty()  || (entities.size() == 1 && entities.get(0) == "")) {
+        if ( entities.isEmpty()  || (entities.size() == 1 && entities.get(0).equals("") ) ) {
             if ( output_properties.size() == 1 ) {
                 // Not found.
                 response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 ) + "?";

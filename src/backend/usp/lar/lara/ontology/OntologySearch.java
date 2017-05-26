@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Realiza uma busca na ontologia.
  */
 package usp.lar.lara.ontology;
 
@@ -9,8 +7,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Arrays;
-import usp.lar.lara.ontology.LaraParser;
-import usp.lar.lara.ontology.Ontologia;
 
 /**
  *

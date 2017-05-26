@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Funções para acessar informações do Calendário Google.
  */
 package usp.lar.lara.calendar;
 
@@ -16,16 +14,14 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.client.util.DateTime;
-import com.google.api.client.util.store.DataStoreFactory;
-
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -37,7 +33,7 @@ import java.util.TimeZone;
 
 /**
  *
- * @author tarcisio
+ * @author Tarcisio
  */
 public class CalendarSearch {
    /** Application name. */
@@ -73,9 +69,8 @@ public class CalendarSearch {
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
-        } catch (Throwable t) {
-            t.printStackTrace();
-            System.exit(1);
+        } catch (IOException | GeneralSecurityException t) {
+            System.exit( 1 );
         }
     }
 
@@ -125,7 +120,6 @@ public class CalendarSearch {
         try{
             service = CalendarSearch.getCalendarService();
         } catch (IOException e){
-            e.printStackTrace();
             System.exit(1);
         }
     }
@@ -231,7 +225,6 @@ public class CalendarSearch {
 
     static private Events search(String date, String time) throws IOException{
 
-        Events events = null;
         Calendar c = new GregorianCalendar();
         c.set(Calendar.HOUR_OF_DAY, 0); 
         c.set(Calendar.MINUTE, 0);
@@ -263,7 +256,7 @@ public class CalendarSearch {
             d2 = c.getTime();
         }
 
-        events = CalendarSearch.service.events().list("primary")
+        Events events = CalendarSearch.service.events().list("primary")
             .setTimeMin(new DateTime(d1))
             .setTimeMax(new DateTime(d2))
             .setOrderBy("startTime")
