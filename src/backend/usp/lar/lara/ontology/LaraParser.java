@@ -30,23 +30,36 @@ public class LaraParser {
     }
 
     public static Type requestType(String pergunta){
+        /*Arrays.asList retorna uma lista com os arrays passados*/
         ArrayList<String> CalendarKeywords = new ArrayList(Arrays.asList("dia", "quando", "semana", "hora", "horário", "horario", "mês", "mes", "ano", "evento", "eventos", "manhã", "manha", "tarde", "noite", "hoje", "amanha", "amanhã"));
+        /*Analisa a pergunta e troca . , e ; por espaço*/
         pergunta = pergunta.replace("."," ");
         pergunta = pergunta.replace(","," ");
         pergunta = pergunta.replace(";"," ");
+        /*Pega a string pergunta, divide ela com os delimitadores "espaço" e cada
+        corte configura um elemento no array list tokens.
+        */
         ArrayList<String> tokens = new ArrayList(Arrays.asList(pergunta.split(" ")));
+        /*Cria um objeto iterator para percorrer o array tokens*/
         Iterator<String> t = tokens.iterator();
         while(t.hasNext()){
+            /*Compara se alguma palavra da string recebida tem correspondência com o
+            array CalendarKeywords, se sim, retorna o tipo Calendar, declarado por enum
+            */
             if(CalendarKeywords.stream().anyMatch(t.next()::equalsIgnoreCase)){
                 return Type.CALENDAR;
             }
         }
+        /*Se não houver correspondência, retorna tipo Ontology*/
         return Type.ONTOLOGY;
     }
 
     public static ArrayList<String> obterPropriedades(String palavra) {
         ArrayList<String> propriedades = new ArrayList();
-
+        
+        /*Analisa uma palava e compara com uma propriedade, se der match coloca no
+        arraylist propriedades, então retorna este
+        */
         if (Investiga.stream().anyMatch(palavra::equalsIgnoreCase)) {
             propriedades.add("investiga");
         } else if ( FicaEm.stream().anyMatch(palavra::equalsIgnoreCase)) {
@@ -72,15 +85,28 @@ public class LaraParser {
      * @return List of entities and properties.
      */
     public static ArrayList<ArrayList<String>> parseOntology( String frase, Ontologia o ) {
+        /*Troca qualquer dos itens citados por espaço*/
         frase = frase.replaceAll("\\.|,|;|:|\\?|!|\"|\\(|\\)|\\*|'", " ");
+        /*cada palavra separada por espaço é considerada um token que é alocada em um array*/
         String[] tokens = frase.split(" ");
+        /*declara um Arraylist para indivíduos e propriedades, para assim que ir analisando
+        todos os tokens, ir achando correspondências e colocando no Arraylist adequado
+        */
         ArrayList<String> individuos = new ArrayList();
         ArrayList<String> propriedades = new ArrayList();
         for ( String token : tokens ) {
             ArrayList<String> prop = obterPropriedades( token );
+            /*Se prop não estiver vazia, entra no if, ou seja, se achar uma correspondência
+            para propriedades.
+            */
             if ( prop.size() > 0 && !prop.get(0).equals("") ) {
                 propriedades.addAll( prop );
-            } else {
+            }
+            /*Se não houver correspondência com propriedades, verifica se tem com
+            indivíduos.
+            */
+            else {
+                /*Para verificar o indivíduo tem que analisar a classe Ontologia*/
                 ArrayList<String> new_indiv = o.executaPropriedade(token, "éChaveDe");
                 if(!new_indiv.isEmpty()){
                     if ( individuos.isEmpty() ) {

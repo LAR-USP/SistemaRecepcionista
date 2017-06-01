@@ -22,7 +22,8 @@ public class OntologySearch {
     
     public JsonObject search(String pergunta, String entidade, String[] propriedades){
         JsonArray novas_props = new JsonArray();
-
+        
+        /* Parsed é uma lista de uma lista de strings, que  guarda algo chamando parseOntology*/
         ArrayList<ArrayList<String>> parsed = LaraParser.parseOntology( pergunta, this.o );
         if(parsed.get(0).isEmpty()){
             if(entidade != null && entidade.isEmpty()){
@@ -49,11 +50,27 @@ public class OntologySearch {
             answer = LaraParser.formatResponse( parsed, this.o );
         }
         
+        /*Aproveita o parsed para poder pegar as informações referentes a sala, telefone e 
+        email vinculado a entidade.
+        */
+        ArrayList<String> entities = parsed.get( 0 );
+        ArrayList<String> sala = o.executaPropriedade(entities.get(0), "ficaEm");
+        ArrayList<String> telefone = o.executaPropriedade(entities.get(0), "possuiRamal");
+        ArrayList<String> endereco_email = o.executaPropriedade(entities.get(0), "possuiEmail");
+        
+        String room = "Sala: " + sala.get(0);
+        String telephone = "Telephone: " + telefone.get(0);
+        String email = "Email: " + endereco_email.get(0);
+        
+        /*Associa toda informação resgatada a um JsonObject rv*/
         JsonObject rv = new JsonObject();
         rv.addProperty("answer", answer);
         String voice = answer.replaceAll("\\<br\\>|\\<ul\\>|\\</ul\\>|\\<li\\>", "").replaceAll("\\</li\\>", ", ");
         rv.addProperty("voice", voice);
         rv.addProperty("entity", entidade);
+        rv.addProperty("room", room);
+        rv.addProperty("telephone", telephone);
+        rv.addProperty("email", email);
         rv.add("properties", novas_props);
 
         return rv;

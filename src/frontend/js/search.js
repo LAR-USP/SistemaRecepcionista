@@ -27,21 +27,6 @@ $(document).on('input', '#searchbar', function(){
     }
     
     $.ajax({
-             url:'Search',
-             dataType: 'json',
-             contentType: "application/json; charset=utf-8",
-             data:{content:str, entity:entity, properties:properties},
-             type:'get',
-             cache:false,
-             success:function(data){
-                 $('#room').html(data.properties);
-             },
-         error:function(){
-             alert('error');
-         }
-    });
-    
-    $.ajax({
             url:'Search',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
@@ -50,6 +35,10 @@ $(document).on('input', '#searchbar', function(){
             cache:false,
             success:function(data){
                 $('#results').html(data.answer);
+                $('#getName').html(data.entity);
+                $('#room').html(data.room);
+                $('#telephone').html(data.telephone);
+                $('#email').html(data.email);
                 if(previous_answer !== data.answer && data.answer != null && data.answer != ""){
                     previous_answer = data.answer;
                     mySpeak(data.voice);
@@ -58,7 +47,7 @@ $(document).on('input', '#searchbar', function(){
                 properties = JSON.stringify(data.properties);
             },
         error:function(){
-            alert('error');
+            /*alert('error');*/
         }
     });
 });

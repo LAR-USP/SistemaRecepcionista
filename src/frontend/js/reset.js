@@ -4,14 +4,14 @@ function reset(){
     $('#searchbar').val("");
     $('#searchbar').blur();
     $('#results').css('top', '40%');
-    $('#searchdiv').css('top', '30%');
+    $('#searchdiv').css('top', '28%');
     
     if(acesso == 1){
         $("#laraface").fadeOut(function(){
-            $("#laraface").css('height', '150px');
-            $("#laraface").css('width', '150px');
+            $("#laraface").css('height', '22.2%');
+            $("#laraface").css('width', '11.2%');
             $("#laraface").css('position', 'relative');
-            $("#laraface").css('top', '180px');
+            $("#laraface").css('top', '25%');
         });
         $("#laraface").fadeIn();
         acesso = 0;

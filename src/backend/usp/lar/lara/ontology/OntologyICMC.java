@@ -135,13 +135,18 @@ public class OntologyICMC {
         OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI + "#" + entidade));
         return indivíduoOWL != null;
     }
-
+    /*Lembrando que recebemos um token e propriedade "éChaveDe"*/
     public ArrayList<String> executeProperty(String indivíduo, String propriedade) {
         indivíduo = toCamelCase(indivíduo);
         ArrayList<String> instancias = new ArrayList();
+        /*Estamos criando um indivíduo vinculado a classe factory e indificando-o colocando
+        # mais o conteúdo de indivíduo
+        */
         OWLNamedIndividual indivíduoOWL = factory.getOWLNamedIndividual(IRI.create(ontologyIRI + "#" + indivíduo));
 
-
+        /*Mesma coisa que com indivíduo, mas com propriedade. Propriedade aqui é uma chave que 
+        relaciona os indivíduos
+        */
         OWLObjectProperty propriedadeOWL = factory.getOWLObjectProperty(IRI.create(ontologyIRI
                 + "#" + propriedade));
 

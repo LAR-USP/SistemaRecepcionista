@@ -37,7 +37,9 @@ public class Ontologia {
             Logger.getLogger(Ontologia.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    
+    /*para a chamada em LaraParser/parseOntology, recebe um token e propriedade "éChaveDe".
+    chama método em ontologiaICMC*/
     public ArrayList<String> executaPropriedade(String individuo, String propriedade) {
         return ontologiaICMC.executeProperty(individuo, propriedade);
     }
