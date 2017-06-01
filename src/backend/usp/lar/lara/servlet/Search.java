@@ -5,14 +5,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
 import usp.lar.lara.ontology.LaraParser;
-import usp.lar.lara.ontology.OntologySearch;
 import usp.lar.lara.calendar.CalendarSearch;
+import usp.lar.lara.ontology.OntologySearch;
 
 /**
  * @brief Recebe a entrada da barra de pesquisa e à envia
@@ -21,10 +21,12 @@ import usp.lar.lara.calendar.CalendarSearch;
  * @author Tarcisio
  */
 public class Search extends HttpServlet{
-    private OntologySearch os = new OntologySearch();
+
+    private final OntologySearch os = new OntologySearch();
     
     /*Json Object é um objeto que guarda dados em formato Json, portanto, retorna
     um Json Object*/
+
     public JsonObject introspection(String pergunta){
         JsonObject rv= new JsonObject();
         String answer = "";
@@ -123,6 +125,7 @@ public class Search extends HttpServlet{
             /*chama métodos em LaraParser, para comparação. Basicamente, analisa a pergunta
             e vê se esta tem alguma correlaçãoc com algum dado que pode ser recuperado
             via calendário. Se não, entra no if*/
+
             if(LaraParser.requestType(pergunta) == LaraParser.Type.ONTOLOGY){
                 /*chama método em OntologySearch*/
                 rv = this.os.search(pergunta, entidade, propriedades);
