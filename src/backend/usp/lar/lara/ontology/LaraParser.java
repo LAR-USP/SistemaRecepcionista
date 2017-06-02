@@ -3,6 +3,7 @@ package usp.lar.lara.ontology;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Classe para traduzir as perguntas do usuário para a ontologia.
@@ -10,23 +11,32 @@ import java.util.Iterator;
  */
 public class LaraParser {
 
-    private static final ArrayList<String> Investiga;
-    private static final ArrayList<String> FicaEm;
-    private static final ArrayList<String> PossuiRamal;
-    private static final ArrayList<String> PossuiEmail;
-    private static final ArrayList<String> Exerce;
-    private static final ArrayList<String> PossuiCurriculo;
+    private static final ArrayList<List<String>> KEYWORDS;
+    private static final ArrayList<String> PROPERTIES;
+    private static final ArrayList<String> OUTPUT_PROPERTIES;
 
     public static enum Type{ ONTOLOGY, CALENDAR };
 
     // Bloco de inicialização de variáveis estáticas.
     static {
-        Investiga = new ArrayList(Arrays.asList("investiga", "pesquisa"));
-        FicaEm = new ArrayList(Arrays.asList("sala", "escritório", "escritorio"));
-        PossuiRamal = new ArrayList(Arrays.asList("ramal", "telefone"));
-        PossuiEmail = new ArrayList(Arrays.asList("email", "e-mail"));
-        Exerce = new ArrayList(Arrays.asList("exerce", "cargo"));
-        PossuiCurriculo = new ArrayList(Arrays.asList("currículo", "curriculo", "lattes"));
+        PROPERTIES = new ArrayList(Arrays.asList("investiga", "ficaEm", "possuiRamal", "possuiEmail", "exerce", "possuiCurrículo", "possuiDescrição", "possuiRobô", "possuiMembro", "possuiLaboratório", "possuiImagem", "fazParteDe", "possuiProjeto", "éInvestigadoPor"));
+        KEYWORDS = new ArrayList(Arrays.asList(
+            Arrays.asList("pesquisa", "investiga"),
+            Arrays.asList("sala", "escritório", "escritorio", "endereço", "endereco", "local"),
+            Arrays.asList("ramal", "telefone"),
+            Arrays.asList("email", "e-mail"),
+            Arrays.asList("cargo", "exerce"),
+            Arrays.asList("currículo", "curriculo", "lattes"),
+            Arrays.asList("resumo", "descrição", "descricao"),
+            Arrays.asList("robô", "robôs", "robo", "robos"),
+            Arrays.asList("membro", "membros", "professor", "professores"),
+            Arrays.asList("laboratório", "laboratórios", "laboratorio", "laboratorios"),
+            Arrays.asList("imagem", "imagens", "foto", "fotos", "figura", "figuras"),
+            Arrays.asList("participa", "parte", "usado"),
+            Arrays.asList("desenvolve", "faz"),
+            Arrays.asList("investigado", "desenvolvido", "pesquisado")
+        ));
+        OUTPUT_PROPERTIES = new ArrayList(Arrays.asList("pesquisa", "local", "ramal", "email", "cargo", "currículo", "descrição", "robô", "membro", "laboratório", "imagem", "participação", "projeto", "por quem é investigado"));
     }
 
     public static Type requestType(String pergunta){
@@ -57,25 +67,16 @@ public class LaraParser {
     public static ArrayList<String> obterPropriedades(String palavra) {
         ArrayList<String> propriedades = new ArrayList();
         
-        /*Analisa uma palava e compara com uma propriedade, se der match coloca no
+        /*Analisa uma palavra e compara com uma propriedade, se der match coloca no
         arraylist propriedades, então retorna este
         */
-        if (Investiga.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("investiga");
-        } else if ( FicaEm.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("ficaEm");
-        } else if (PossuiRamal.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("possuiRamal");
-        } else if (PossuiEmail.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("possuiEmail");
-        } else if (Exerce.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("exerce");
-        } else if (palavra.equalsIgnoreCase("contato")) {
-            propriedades.add("possuiRamal");
-            propriedades.add("possuiEmail");
-        } else if (PossuiCurriculo.stream().anyMatch(palavra::equalsIgnoreCase)) {
-            propriedades.add("possuiCurrículo");
+
+        for(int i = 0; i < PROPERTIES.size(); ++i){
+            if(KEYWORDS.get(i).stream().anyMatch(palavra::equalsIgnoreCase)){
+                propriedades.add(PROPERTIES.get(i));
+            }
         }
+
         return propriedades;
     }
 
@@ -138,28 +139,23 @@ public class LaraParser {
         ArrayList<String> properties = input.get( 1 );
 
         ArrayList<String> output_properties = new ArrayList();
-        for(int i = 0; i < properties.size(); ++i){
-            if("investiga".equals(properties.get(i))){
-                output_properties.add("pesquisa");
-            } else if("ficaEm".equals(properties.get(i))){
-                output_properties.add("sala");
-            } else if("possuiRamal".equals(properties.get(i))){
-                output_properties.add("ramal");
-            } else if("possuiEmail".equals(properties.get(i))){
-                output_properties.add("email");
-            } else if("possuiCurrículo".equals(properties.get(i))){
-                output_properties.add("currículo");
-            } else if("exerce".equals(properties.get(i))){
-                output_properties.add("cargo");
+        Iterator<String> prop_it = properties.iterator();
+        while(prop_it.hasNext()){
+            String token = prop_it.next();
+            for(int i = 0; i < PROPERTIES.size(); ++i){
+                if(PROPERTIES.get(i).equalsIgnoreCase(token)){
+                    output_properties.add(OUTPUT_PROPERTIES.get(i));
+                    break;
+                }
             }
         }
         if ( entities.isEmpty()  || (entities.size() == 1 && entities.get(0).equals("") ) ) {
             if ( output_properties.size() == 1 ) {
                 // Not found.
-                response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 ) + "?";
+                response = "Sobre o quê ou quem gostaria de saber o(a)(s) " + output_properties.get( 0 ) + "?";
             }
             else if ( !output_properties.isEmpty() ){ // More than one property about something.
-                response = "Sobre o quê ou quem gostaria de saber o(a) " + output_properties.get( 0 );
+                response = "Sobre o quê ou quem gostaria de saber o(a)(s) " + output_properties.get( 0 );
                 for ( int i = 1; i < output_properties.size() - 1; i++ ) {
                     response = response + ", " + output_properties.get( i );
                 }
