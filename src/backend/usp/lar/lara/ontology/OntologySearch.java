@@ -54,9 +54,18 @@ public class OntologySearch {
         ArrayList<String> telefone = o.executaPropriedade(entities.get(0), "possuiRamal");
         ArrayList<String> endereco_email = o.executaPropriedade(entities.get(0), "possuiEmail");
         
-        String room = "Sala: " + sala.get(0);
-        String telephone = "Telephone: " + telefone.get(0);
-        String email = "Email: " + endereco_email.get(0);
+        String room = "";
+        String telephone = "";
+        String email = "";
+        if(!sala.isEmpty()){
+            room = "Sala: " + sala.get(0);
+        }
+        if(!telefone.isEmpty()){
+            telephone = "Telephone: " + telefone.get(0);
+        }
+        if(!endereco_email.isEmpty()){
+            email = "Email: " + endereco_email.get(0);
+        }
         
         /*Associa toda informação resgatada a um JsonObject rv*/
         JsonObject rv = new JsonObject();
