@@ -108,7 +108,7 @@ public class LaraParser {
             */
             else {
                 /*Para verificar o indivíduo tem que analisar a classe Ontologia*/
-                ArrayList<String> new_indiv = o.executaPropriedade(token, "éChaveDe");
+                ArrayList<String> new_indiv = o.executaPropriedade(OntologyICMC.toCamelCase(token), "éChaveDe");
                 if(!new_indiv.isEmpty()){
                     if ( individuos.isEmpty() ) {
                         individuos.addAll( new_indiv );

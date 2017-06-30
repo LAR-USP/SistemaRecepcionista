@@ -138,7 +138,8 @@ public class OntologyICMC {
     /*Lembrando que recebemos um token e propriedade "éChaveDe"*/
     public ArrayList<String> executeProperty(String indivíduo, String propriedade) {
         
-        indivíduo = toCamelCase(indivíduo);
+        // indivíduo = toCamelCase(indivíduo);
+        indivíduo = indivíduo.replaceAll(" ", "_");
         
         ArrayList<String> instancias = new ArrayList();
         /*Estamos criando um indivíduo vinculado a classe factory e indificando-o colocando
@@ -159,6 +160,9 @@ public class OntologyICMC {
 
             instancias.add(individuo.getIRI().toURI().getFragment().replaceAll("_", " "));
         }
+        System.out.println(indivíduo);
+        System.out.println(propriedade);
+        System.out.println(instancias);
 
         return instancias;
     }
@@ -287,7 +291,7 @@ public class OntologyICMC {
 //        else
 //            return "";
     }
-    private static String toCamelCase(String s) {
+    public static String toCamelCase(String s) {
         String[] parts = s.split(" ");
         String camelCaseString = "";
         for (String part : parts) {

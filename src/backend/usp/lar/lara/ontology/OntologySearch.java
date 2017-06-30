@@ -22,7 +22,7 @@ public class OntologySearch {
         /* Parsed é uma lista de uma lista de strings, que  guarda algo chamando parseOntology*/
         ArrayList<ArrayList<String>> parsed = LaraParser.parseOntology( pergunta, this.o );
         if(parsed.get(0).isEmpty()){
-            if(entidade != null && entidade.isEmpty()){
+            if(entidade != null && !entidade.isEmpty()){
                 parsed.get(0).add(entidade);
             }
         } else if(parsed.get(0).size() == 1){
@@ -50,21 +50,23 @@ public class OntologySearch {
         email vinculado a entidade.
         */
         ArrayList<String> entities = parsed.get( 0 );
-        ArrayList<String> sala = o.executaPropriedade(entities.get(0), "ficaEm");
-        ArrayList<String> telefone = o.executaPropriedade(entities.get(0), "possuiRamal");
-        ArrayList<String> endereco_email = o.executaPropriedade(entities.get(0), "possuiEmail");
         
         String room = "";
         String telephone = "";
         String email = "";
-        if(!sala.isEmpty()){
-            room = "Sala: " + sala.get(0);
-        }
-        if(!telefone.isEmpty()){
-            telephone = "Telephone: " + telefone.get(0);
-        }
-        if(!endereco_email.isEmpty()){
-            email = "Email: " + endereco_email.get(0);
+        if(entities != null && !entities.isEmpty()){
+            ArrayList<String> sala = o.executaPropriedade(entities.get(0), "ficaEm");
+            ArrayList<String> telefone = o.executaPropriedade(entities.get(0), "possuiRamal");
+            ArrayList<String> endereco_email = o.executaPropriedade(entities.get(0), "possuiEmail");
+            if(!sala.isEmpty()){
+                room = "Sala: " + sala.get(0);
+            }
+            if(!telefone.isEmpty()){
+                telephone = "Telephone: " + telefone.get(0);
+            }
+            if(!endereco_email.isEmpty()){
+                email = "Email: " + endereco_email.get(0);
+            }
         }
         
         /*Associa toda informação resgatada a um JsonObject rv*/
