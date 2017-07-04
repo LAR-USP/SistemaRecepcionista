@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>br.usp.icmc.lar.lara.servlet.Search</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Detect</servlet-name>
+        <servlet-class>br.usp.icmc.lar.lara.servlet.Detect</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Detect</servlet-name>
+        <url-pattern>/Detect</url-pattern>
+    </servlet-mapping>
+    <!-- <listener>
+        <listener-class>br.usp.icmc.lar.lara.servlet.LibraryLoader</listener-class>
+    </listener> -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
+
