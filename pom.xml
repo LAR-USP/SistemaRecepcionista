@@ -199,7 +199,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>22.0</version>
+            <version>24.1.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
         <dependency>
